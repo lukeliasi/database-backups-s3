@@ -1,0 +1,33 @@
+{
+  "name": "database-backups-s3",
+  "version": "1.0.0",
+  "description": "Script to automatically backup one or multiple databases to AWS S3",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Luke Liasi",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.317.0",
+    "cron": "2.3.0",
+    "dotenv": "^16.3.1"
+  },
+  "keywords": [
+    "backups",
+    "backup",
+    "auto",
+    "automatic",
+    "automatically",
+    "postgres",
+    "postgresql",
+    "mysql",
+    "mongodb",
+    "mongo",
+    "pg_dump",
+    "mongodump",
+    "mysqldump",
+    "s3",
+    "aws"
+  ]
+}
