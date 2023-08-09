@@ -1,9 +1,18 @@
-# Database S3 backups
-This script provides a simple and automated way to back up your essential databases to AWS S3, ensuring that your data is always safe and retrievable.
 
-The script provides the capability to initiate backups either upon its startup or on a scheduled basis using Cron expressions. Backups are compressed to reduce file size.
+# Database S3 backups
+This script provides a simple all-in-one automated way to back up your databases to AWS S3.
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/U_wjYd?referralCode=lukeliasi)
+
+Supported databases:
+- `postgres`
+- `mysql`
+- `mongodb`
+
+## Features
+- Define multiple databases of different types in your configuration, and the script will automatically handle the backup process for all of them in one execution.
+- Backups can be initiated either upon the script execution or on a scheduled basis using a cron job. 
+- Backups are compressed to reduce file size.
 
 ## How it works 
 1. Define database connection URI strings for each database you want backed up and the backup schedule 
@@ -11,10 +20,6 @@ The script provides the capability to initiate backups either upon its startup o
 3. The dump is compressed and uploaded to your defined AWS S3 Bucket
 4. Finally, the dumps are cleaned up on the local file system
 
-Supported databases:
-- `postgres`
-- `mysql`
-- `mongodb`
 
 ## Configuration
 Create a `.env` file in the root directory with the following variables:
