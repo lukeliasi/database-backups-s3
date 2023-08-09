@@ -12,7 +12,7 @@ The script provides the capability to initiate backups either upon its startup o
 Supported databases:
 - `postgres`
 - `mysql`
-- `mongodb`.
+- `mongodb`
 
 ## Configuration
 Create a `.env` file in the root directory with the following variables:
@@ -32,7 +32,7 @@ DATABASES="mysql://user:password@host:port/database,postgresql://user:password@h
 
 | Key                     | Description              | Optional | Default Value |
 |-------------------------|--------------------------|----------|---------------|
-| `DATABASES`             | Comma-separated string list of database URIs that should be backed up. | No | `[]`|
+| `DATABASES`             | Comma-separated connection strings list of database URIs that should be backed up. | No | `[]`|
 | `RUN_ON_STARTUP`        | Boolean value that indicates if the script should run immediately on startup. | Yes | `false` |
 | `CRON`                  | Cron expression for scheduling when the backup job will run for all databases. See [Crontab.guru](https://crontab.guru/) for help setting up schedules. | Yes | |
 | `AWS_ACCESS_KEY_ID`     | [AWS access key ID](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). | No | |
