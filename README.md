@@ -3,6 +3,8 @@ This script provides a simple and automated way to back up your essential databa
 
 The script provides the capability to initiate backups either upon its startup or on a scheduled basis using Cron expressions. Backups are compressed to reduce file size.
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/U_wjYd?referralCode=lukeliasi)
+
 ## How it works 
 1. Define database connection URI strings for each database you want backed up and the backup schedule 
 2. The script will connect to the database(s) and do a dump
