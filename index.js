@@ -22,9 +22,11 @@ function loadConfig() {
 
   return {
     aws: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       credentials: {
         accessKeyId:  process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey:  process.env.AWS_SECRET_ACCESS_KEY
+        secretAccessKey:  process.env.AWS_SECRET_ACCESS_KEY 
       },
       region: process.env.AWS_S3_REGION,
       endpoint: process.env.AWS_S3_ENDPOINT,
@@ -87,7 +89,7 @@ async function processBackup() {
         return;
     }
 
-    
+    try {
       // 1. Execute the dump command
       await exec(dumpCommand);
 
@@ -108,7 +110,9 @@ async function processBackup() {
       await s3Client.send(putCommand);
       
       console.log(`✓ Successfully uploaded db backup for database ${dbType} ${dbName} ${dbHostname}.`);
-    
+    } catch (error) {
+      console.error(`An error occurred while processing the database ${dbType} ${dbName}, host: ${dbHostname}): ${error}`);
+    }
   }
 }
 
