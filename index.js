@@ -82,7 +82,7 @@ async function processBackup() {
         dumpCommand = `mongodump --uri="${databaseURI}" --archive="${filepath}.dump"`;
         break;
       case 'mysql':
-        dumpCommand = `mysqldump -u ${dbUser} -p${dbPassword} -h ${dbHostname} -P ${dbPort} ${dbName} > "${filepath}.dump"`;
+        dumpCommand = `mysqldump -u ${dbUser} -p${dbPassword} -h ${dbHostname} -P ${dbPort} ${dbName}`;
         break;
       default:
         console.log(`Unknown database type: ${dbType}`);
