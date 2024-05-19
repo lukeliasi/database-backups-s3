@@ -82,14 +82,14 @@ async function processBackup() {
         dumpCommand = `mongodump --uri="${databaseURI}" --archive="${filepath}.dump"`;
         break;
       case 'mysql':
-        dumpCommand = `mysqldump -u ${dbUser} -p${dbPassword} -h ${dbHostname} -P ${dbPort} ${dbName}`;
+        dumpCommand = `mysqldump -u ${dbUser} -p${dbPassword} -h ${dbHostname} -P ${dbPort} ${dbName} > "${filepath}.dump"`;
         break;
       default:
         console.log(`Unknown database type: ${dbType}`);
         return;
     }
 
-   
+    try {
       // 1. Execute the dump command
       await exec(dumpCommand);
 
@@ -110,7 +110,9 @@ async function processBackup() {
       await s3Client.send(putCommand);
       
       console.log(`✓ Successfully uploaded db backup for database ${dbType} ${dbName} ${dbHostname}.`);
-    
+    } catch (error) {
+      console.error(`An error occurred while processing the database ${dbType} ${dbName}, host: ${dbHostname}): ${error}`);
+    }
   }
 }
 
