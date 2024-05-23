@@ -1,5 +1,5 @@
 # Build Stage
-FROM alpine:3.14 AS build
+FROM alpine:latest AS build
 
 WORKDIR /root
 
@@ -11,7 +11,7 @@ RUN npm install
 RUN npm prune --production
 
 # Final Stage
-FROM alpine:3.14
+FROM alpine:latest
 
 WORKDIR /root
 
