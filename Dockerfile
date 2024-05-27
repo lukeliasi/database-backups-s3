@@ -22,6 +22,8 @@ COPY --from=build /root/node_modules ./node_modules
 COPY ./ /root
 
 # Install PostgreSQL, MySQL and MongoDB clients
-RUN apk add --update --no-cache postgresql-client mysql-client mongodb-tools nodejs npm
+
+RUN apk add --update --no-cache postgresql-client mysql-client mongodb-tools nodejs npm mariadb-connector-c-dev
+
 
 ENTRYPOINT ["node", "index.js"]
