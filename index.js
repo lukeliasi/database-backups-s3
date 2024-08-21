@@ -70,15 +70,19 @@ async function processBackup() {
     console.log(`\n[${databaseIteration}/${totalDatabases}] ${dbType}/${dbName} Backup in progress...`);
 
     let dumpCommand;
+    let versionCommand = 'echo "Unknown database type"';
     switch (dbType) {
       case 'postgresql':
         dumpCommand = `pg_dump "${databaseURI}" -F c > "${filepath}.dump"`;
+        versionCommand = 'psql --version';
         break;
       case 'mongodb':
         dumpCommand = `mongodump --uri="${databaseURI}" --archive="${filepath}.dump"`;
+        versionCommand = 'mongodump --version';
         break;
       case 'mysql':
         dumpCommand = `mysqldump -u ${dbUser} -p${dbPassword} -h ${dbHostname} -P ${dbPort} ${dbName} > "${filepath}.dump"`;
+        versionCommand = 'mysql --version';
         break;
       default:
         console.log(`Unknown database type: ${dbType}`);
@@ -86,6 +90,14 @@ async function processBackup() {
     }
 
     try {
+      // Log database client version
+      try {
+        const { stdout: versionOutput } = await exec(versionCommand);
+        console.log(`Using ${dbType} client version:`, versionOutput.trim());
+      } catch (versionError) {
+        console.warn(`Failed to get ${dbType} client version:`, versionError.message);
+      }
+
       // 1. Execute the dump command
       await exec(dumpCommand);
 
