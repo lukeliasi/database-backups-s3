@@ -106,6 +106,9 @@ async function processBackup() {
       await s3Client.send(putCommand);
       
       console.log(`✓ Successfully uploaded db backup for database ${dbType} ${dbName} ${dbHostname}.`);
+
+      // 5. Clean up temporary files
+      await exec(`rm -f ${filepath} ${filepath}.dump`);
     } catch (error) {
       console.error(`An error occurred while processing the database ${dbType} ${dbName}, host: ${dbHostname}): ${error}`);
     }
