@@ -77,7 +77,7 @@ async function processBackup() {
         versionCommand = 'psql --version';
         break;
       case 'mongodb':
-        dumpCommand = `mongodump --uri="${databaseURI}" --archive="${filepath}.dump"`;
+        dumpCommand = `mongodump --authenticationDatabase admin --uri="${databaseURI}" --archive="${filepath}.dump"`;
         versionCommand = 'mongodump --version';
         break;
       case 'mysql':
